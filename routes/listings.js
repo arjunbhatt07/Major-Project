@@ -5,14 +5,12 @@ const Listing = require("../models/listing.js");
 const {isLoggedIn , isOwner , validateListing } = require("../middlewar.js");
 const { Cursor } = require("mongoose");
 
-
+const listingController = require("../controllers/listings.js");
 
 //index Route
 
-router.get("/" , wrapAsync(async (req , res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs" , {allListings});
-}));
+router.get("/" , wrapAsync(index)
+);
 
 //New Route
 router.get("/new" , isLoggedIn , (req , res) =>{
