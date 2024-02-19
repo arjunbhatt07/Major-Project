@@ -7,10 +7,17 @@ const { Cursor } = require("mongoose");
 
 const listingController = require("../controllers/listings.js");
 
-//index Route
 
-router.get("/" , wrapAsync(listingController.index)
+router
+.route("/")
+.get( wrapAsync(listingController.index)); 
+.post( 
+isLoggedIn ,
+validateListing,
+wrapAsync(listingController.createListing)
 );
+
+
 
 //New Route
 router.get("/new" , isLoggedIn , listingController.renderNewForm);
@@ -18,12 +25,6 @@ router.get("/new" , isLoggedIn , listingController.renderNewForm);
 
 //show Route
 router.get("/:id" ,wrapAsync(listingController.showListing));
-
-//create route
-router.post("/" , isLoggedIn ,
- validateListing,
- wrapAsync(listingController.createListing)
-);
 
 //Edit Route
 router.get("/:id/edit" ,isLoggedIn , isOwner ,wrapAsync(listingController.renderEditForm)
