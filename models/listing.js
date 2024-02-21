@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 const Review = require("./review.js");
+const { string } = require("joi");
 
 const listingSchema = new Schema({
   title: {
@@ -9,13 +10,8 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    type: String,
-    default:
-      "https://unsplash.com/photos/a-body-of-water-with-a-wave-coming-in-p9Aef2P9hv0",
-    set: (v) =>
-      v === ""
-        ? "https://unsplash.com/photos/a-body-of-water-with-a-wave-coming-in-p9Aef2P9hv0"
-        : v,
+    url: String ,
+    filename: String ,
   },
   price: Number,
   location: String,
